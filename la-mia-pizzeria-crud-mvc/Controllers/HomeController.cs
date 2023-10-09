@@ -21,10 +21,10 @@ namespace la_mia_pizzeria_crud.Controllers
 
         public IActionResult UserIndex()
         {
-            if (User.IsInRole("ADMIN"))
+            /*if (User.IsInRole("ADMIN"))
             {
                 return Redirect("/Pizza/Index");
-            }
+            }*/
                 List<Pizza> pizzas = new List<Pizza>();
             try
             {
