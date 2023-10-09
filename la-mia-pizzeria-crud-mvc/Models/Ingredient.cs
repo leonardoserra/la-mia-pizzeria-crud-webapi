@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace la_mia_pizzeria_crud.Models
 {
@@ -16,6 +17,7 @@ namespace la_mia_pizzeria_crud.Models
 
         [Column("name")]
         public string Name { get; set; }
+        [JsonIgnore]
         [Column("pizzas")]
         public List<Pizza>? Pizzas { get; set; }
 

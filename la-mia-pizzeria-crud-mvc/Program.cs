@@ -3,6 +3,7 @@ using la_mia_pizzeria_crud.CustomLoggers;
 using la_mia_pizzeria_crud.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 //var connectionString = builder.Configuration.GetConnectionString("PizzeriaContextConnection") ?? throw new InvalidOperationException("Connection string 'PizzeriaContextConnection' not found.");
@@ -18,6 +19,10 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<PizzeriaContext, PizzeriaContext>();
 //builder.Services.AddScoped<ICustomLoggers, CustomConsoleLogger>();
 builder.Services.AddScoped<ICustomLogger, CustomFileLogger>();
+
+//setting JSON directive so doesn't try to serialize the Cycliyng informations
+builder.Services.AddControllers()
+    .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline. 
@@ -40,11 +45,11 @@ app.UseAuthorization();
 /*string pattern = "";
 if (User.IsInRole("ADMIN"))
 {
-    pattern = "Admin/_Layout";
+    pattern = "{controller=Pizza}/{action=Index}/{id?}";
 }
 else
 {
-    pattern = "User/_Layout";
+    pattern = "{controller=Home}/{action=UserIndex}/{id?}";
 }*/
 
 app.MapControllerRoute(
