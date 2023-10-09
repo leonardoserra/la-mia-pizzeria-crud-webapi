@@ -78,6 +78,6 @@ Quindi abbiamo bisogno dei metodi per :
 >  - modificare una pizza in base all’id  
 >  - cancellare una pizza  
   
-Testiamo tutti i metodi utilizzando Postman.
-BONUS:
+Testiamo tutti i metodi utilizzando Postman.  
+**BONUS:**
 Proviamo ad implementare il repository pattern, così come accennato e visto a lezione.
