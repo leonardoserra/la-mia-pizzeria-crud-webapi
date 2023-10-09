@@ -503,3 +503,9 @@ LOG: 09/10/2023 16:18:13 - utente entrato in index
 LOG: 09/10/2023 16:18:18 - utente entrato in dettaglio item 36
 LOG: 09/10/2023 16:18:20 - utente entrato in modifica elemento 36
 LOG: 09/10/2023 16:18:24 - utente entrato in dettaglio item 36
+LOG: 09/10/2023 16:28:59 - utente entrato in index
+LOG: 09/10/2023 16:32:49 - utente entrato in index
+LOG: 09/10/2023 16:36:19 - utente entrato in index
+LOG: 09/10/2023 16:36:34 - utente entrato in index
+LOG: 09/10/2023 16:37:36 - utente entrato in index
+LOG: 09/10/2023 16:37:55 - utente entrato in index
