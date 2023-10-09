@@ -4,6 +4,7 @@ using la_mia_pizzeria_crud.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using Microsoft.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 //var connectionString = builder.Configuration.GetConnectionString("PizzeriaContextConnection") ?? throw new InvalidOperationException("Connection string 'PizzeriaContextConnection' not found.");
@@ -42,19 +43,21 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 
-/*string pattern = "";
-if (User.IsInRole("ADMIN"))
+
+//if (User.IsInRole("ADMIN")){
+/*Object defaultRoute = new
 {
-    pattern = "{controller=Pizza}/{action=Index}/{id?}";
-}
-else
-{
-    pattern = "{controller=Home}/{action=UserIndex}/{id?}";
-}*/
+    controller = "Pizza",
+    action = "Index",
+};*/
+//else{ pattern = "{controller=Home}/{action=UserIndex}/{id?}";}
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=UserIndex}/{id?}");
+    pattern: "{controller=Home}/{action=UserIndex}/{id?}"
+    /*pattern: "",
+    defaults: defaultRoute*/
+    );
 
 app.MapRazorPages();
 
