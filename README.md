@@ -65,8 +65,8 @@ Facciamo in modo che gli utenti con role USER possano accedere solo alla pagina 
   
 BONUS:  
 > Provate a fare in modo che un utente quando si registra per la prima volta gli venga associato il ruolo di default come "USER"
-
-la-mia-pizzeria-crud-mvc PARTE 7
+  
+# la-mia-pizzeria-crud-mvc PARTE 7  
   Ciao ragazzi, andiamo avanti col nostro progetto!  
 1. Abbiamo studiato cosa sono le WebApi...è il momento di mettere in pratica quello che abbiamo imparato.  
 2. Dobbiamo quindi creare un controller Controllers/Api/PizzasController che implementerà le nostre webapi.  
