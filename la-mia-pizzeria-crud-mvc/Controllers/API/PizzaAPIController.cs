@@ -24,5 +24,12 @@ namespace la_mia_pizzeria_crud.Controllers.API
             return Ok(pizzas);
         }
 
+        [HttpGet]
+        public IActionResult SearchPizzasByName(string search)
+        {
+            List<Pizza> pizzas = _db.Pizzas.Include(pizza => pizza.Category).Include(pizza => pizza.Ingredients).Where(pizza=> pizza.Name.ToLower().Contains(search.ToLower())).ToList();
+            return Ok(pizzas);
+        }
+
     }
 }
