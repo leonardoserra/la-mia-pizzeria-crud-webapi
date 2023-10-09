@@ -104,5 +104,25 @@ namespace la_mia_pizzeria_crud.Controllers.API
 
             return Ok(pizzaToUpdate);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+                return BadRequest(new { message = "Inserire un id" });
+
+            Pizza? pizzaToDelete = _db.Pizzas.Where(pizza => pizza.Id == id)
+                                    .FirstOrDefault();
+            if (pizzaToDelete == null)
+                return NotFound(new { message = "Pizza non trovata a quell id" });
+
+            _db.Remove(pizzaToDelete);
+            int success = _db.SaveChanges();
+
+            if (success != 1)
+                return BadRequest(new { message = "Dati inviati non validi" });
+
+            return Ok(pizzaToDelete);
+        }
     }
 }
