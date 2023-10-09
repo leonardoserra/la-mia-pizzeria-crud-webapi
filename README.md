@@ -64,5 +64,20 @@ Ricordiamoci poi di bloccare l’accesso al nostro controller delle Pizze con [A
 Facciamo in modo che gli utenti con role USER possano accedere solo alla pagina con l’elenco delle pizze e ai dettagli della singola pizza. Mentre gli utenti con role ADMIN devono poter creare, modificare e cancellare le pizze.  
   
 BONUS:  
-> Provate a fare in modo che un utente quando si registra per la prima volta gli venga associato il ruolo di default come "USER"  
+> Provate a fare in modo che un utente quando si registra per la prima volta gli venga associato il ruolo di default come "USER"
 
+la-mia-pizzeria-crud-mvc PARTE 7
+  Ciao ragazzi, andiamo avanti col nostro progetto!  
+1. Abbiamo studiato cosa sono le WebApi...è il momento di mettere in pratica quello che abbiamo imparato.  
+2. Dobbiamo quindi creare un controller Controllers/Api/PizzasController che implementerà le nostre webapi.  
+  
+Quindi abbiamo bisogno dei metodi per :  
+> restituire la lista di tutte le nostre pizze (deve essere possibile passare un parametro di filtro e restituire le pizze il cui titolo contiene il filtro inviato)
+> restituire una pizza in base all’id  
+> creare una nuova pizza  
+> modificare una pizza in base all’id  
+> cancellare una pizza  
+  
+Testiamo tutti i metodi utilizzando Postman.
+BONUS:
+Proviamo ad implementare il repository pattern, così come accennato e visto a lezione.
