@@ -1,0 +1,12 @@
+﻿@{
+    string layout = "";
+    if (User.IsInRole("ADMIN"))
+    {
+        layout = "Admin/_Layout";
+    }
+    else
+    {
+        layout = "User/_Layout";
+    }
+    Layout = layout;
+}

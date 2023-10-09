@@ -1,0 +1,99 @@
+﻿@{
+    Layout = "Admin/_Layout";
+}
+@model List<Pizza>
+
+
+<div class="mt-5 pt-3"></div>
+
+    @*BUTTON OFFCANVAS*@
+    <div class="row pt-3">
+        <div class="col-12 ">
+            <button class="btn btn-warning" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasManagePizza" aria-controls="offcanvasManagePizza">
+                Gestisci la tua pagina
+            </button>
+        </div>
+    </div>
+    @if (Model.Count == 0)
+    {
+        <h2>Lista di pizze vuote, aggiungine qualcuna al database!</h2>
+    }
+    else
+    {
+        
+        @*TABELLA*@
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="col-2" scope="col">Immagine</th>
+                        <th scope="col">Nome</th>
+                        <th class="col-2" scope="col">Descrizione</th>
+                        <th class="col-1" scope="col">Prezzo</th>
+                        <th class="col-2" scope="col">Categoria</th>
+                        <th class="col-2" scope="col">Ingredienti</th>
+                        <th class="col-1" scope="col">Azioni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(Pizza pizza in Model)
+                    {
+                        <tr >
+                            <td>
+                                <img height="150" src="@pizza.ImagePath" class="card-img-top object-fit-cover" role="img" focusable="false" alt="@pizza.Name" />
+                            </td>
+
+                            <td>@pizza.Name</td>
+                            <td>@pizza.Description</td>
+                            <td>@pizza.Price €</td>
+                            <td>
+                                @if (pizza.Category == null)
+                                {
+                                    <span>Nessuna categoria assegnata</span>
+                                }else{
+                                    <span>@pizza.Category.Name</span>
+                                }
+                            </td>
+                            <td>
+                                @if (pizza.Ingredients == null || pizza.Ingredients.Count() <= 0)
+                                {
+                                    <span>Nessun ingrediente</span>
+                                }
+                                else
+                                {
+                                    <ul class="list-unstyled">
+                                        @foreach(Ingredient ingredient in pizza.Ingredients)
+                                        {
+                                            <li>- @ingredient.Name</li>
+                                        }
+                                   </ul>
+                                }
+                            </td>
+                            @* ACTIONS *@
+                            <td>
+                                <div class="d-flex flex-column align-items-center justify-content-between ">
+                                    <a class="text-decoration-none text-reset py-2" href="@Url.Action("Details","Pizza", new{id=pizza.Id})">
+                                        <button type="button" class="_my-btn-standard-width btn text-light btn-success btn-sm btn-outline-secondary"> Dettagli</button>
+                                    </a>
+                                        <a class="text-decoration-none text-reset py-2" href="@Url.Action("Update","Pizza", new{id=pizza.Id})">
+                                        <button type="button" class="_my-btn-standard-width btn text-dark btn-warning btn-sm btn-outline-secondary">Modifica</button>
+                                    </a>
+
+                                    <div class="py-2">
+                                        <form asp-controller="Pizza" asp-action="Delete" asp-route-id="@pizza.Id" method="post">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="_my-btn-standard-width btn text-light btn-danger btn-sm btn-outline-secondary">Elimina</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+
+  
+
