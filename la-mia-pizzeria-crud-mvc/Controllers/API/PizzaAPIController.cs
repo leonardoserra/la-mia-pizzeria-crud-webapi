@@ -20,15 +20,54 @@ namespace la_mia_pizzeria_crud.Controllers.API
         [HttpGet]
         public IActionResult GetPizzas()
         {
-            List<Pizza> pizzas = _db.Pizzas.Include(pizza=> pizza.Category).Include(pizza=>pizza.Ingredients).ToList();
+            List<Pizza>? pizzas = _db.Pizzas.Include(pizza=> pizza.Category)
+                                .Include(pizza=>pizza.Ingredients)
+                                .ToList();
+            if (pizzas == null)
+            {
+                return NotFound(new { message = "Nessuna pizza trovata." });
+            }
             return Ok(pizzas);
         }
 
         [HttpGet]
-        public IActionResult SearchPizzasByName(string search)
+        public IActionResult SearchPizzasByName(string? search)
         {
-            List<Pizza> pizzas = _db.Pizzas.Include(pizza => pizza.Category).Include(pizza => pizza.Ingredients).Where(pizza=> pizza.Name.ToLower().Contains(search.ToLower())).ToList();
+            if(search == null)
+            {
+                return BadRequest(new { message = "Ricerca non valida." });
+            }
+
+            List<Pizza>? pizzas = _db.Pizzas.Include(pizza => pizza.Category)
+                                .Include(pizza => pizza.Ingredients)
+                                .Where(pizza=> pizza.Name.ToLower()
+                                .Contains(search.ToLower()))
+                                .ToList();
+            if(pizzas == null)
+            {
+                return NotFound(new { message = "Nessuna pizza trovata."});
+            }
             return Ok(pizzas);
+        }
+
+
+        [HttpGet]
+        public IActionResult GetPizzaById(int? id)
+        {
+            if(id == null)
+            {
+                return BadRequest(new { message = "Ricerca non valida." });
+
+            }
+            Pizza? foundedPizza = _db.Pizzas.Include(pizza => pizza.Category)
+                                .Include(pizza => pizza.Ingredients)
+                                .Where(pizza => pizza.Id==id)
+                                .FirstOrDefault();
+            if (foundedPizza == null)
+            {
+                return NotFound(new { message = "Non ci sono pizze con questo id." });
+            }
+            return Ok(foundedPizza);
         }
 
     }
