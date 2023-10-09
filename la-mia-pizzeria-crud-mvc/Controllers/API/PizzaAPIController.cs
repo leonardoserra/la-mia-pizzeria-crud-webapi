@@ -24,9 +24,8 @@ namespace la_mia_pizzeria_crud.Controllers.API
                                 .Include(pizza=>pizza.Ingredients)
                                 .ToList();
             if (pizzas == null)
-            {
                 return NotFound(new { message = "Nessuna pizza trovata." });
-            }
+            
             return Ok(pizzas);
         }
 
@@ -34,9 +33,7 @@ namespace la_mia_pizzeria_crud.Controllers.API
         public IActionResult SearchPizzasByName(string? search)
         {
             if(search == null)
-            {
                 return BadRequest(new { message = "Ricerca non valida." });
-            }
 
             List<Pizza>? pizzas = _db.Pizzas.Include(pizza => pizza.Category)
                                 .Include(pizza => pizza.Ingredients)
@@ -44,9 +41,8 @@ namespace la_mia_pizzeria_crud.Controllers.API
                                 .Contains(search.ToLower()))
                                 .ToList();
             if(pizzas == null)
-            {
                 return NotFound(new { message = "Nessuna pizza trovata."});
-            }
+            
             return Ok(pizzas);
         }
 
@@ -55,20 +51,32 @@ namespace la_mia_pizzeria_crud.Controllers.API
         public IActionResult GetPizzaById(int? id)
         {
             if(id == null)
-            {
                 return BadRequest(new { message = "Ricerca non valida." });
-
-            }
+            
             Pizza? foundedPizza = _db.Pizzas.Include(pizza => pizza.Category)
                                 .Include(pizza => pizza.Ingredients)
                                 .Where(pizza => pizza.Id==id)
                                 .FirstOrDefault();
+
             if (foundedPizza == null)
-            {
                 return NotFound(new { message = "Non ci sono pizze con questo id." });
-            }
+            
             return Ok(foundedPizza);
         }
 
+        [HttpPost]
+        public IActionResult Create([FromBody]Pizza? newPizza)
+        {
+            if(newPizza == null)
+                return BadRequest(new { message = "Dati inviati non validi" });
+            
+            _db.Pizzas.Add(newPizza);
+            int success = _db.SaveChanges();
+            
+            if (success != 1)
+                return BadRequest(new { message = "Dati inviati non validi" });
+
+            return Ok(newPizza);
+        }
     }
 }
