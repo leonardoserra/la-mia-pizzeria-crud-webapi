@@ -66,20 +66,25 @@ namespace la_mia_pizzeria_crud.Controllers.API
             return Ok(foundedPizza);
         }
 
-        [HttpPost]
-        public IActionResult Create([FromBody] Pizza? newPizza)
-        {
-            if (newPizza == null)
-                return BadRequest(new { message = "Dati inviati non validi" });
 
-            _db.Pizzas.Add(newPizza);
-            int success = _db.SaveChanges();
+        
+        
+         [HttpPost]
+         public IActionResult Create([FromBody] Pizza? newPizza)
+         {
+             if (newPizza == null)
+                 return BadRequest(new { message = "Dati inviati non validi" });
+            if (newPizza.ImagePath == null || newPizza.ImagePath == "") {
+                newPizza.ImagePath = "/img/default.png";
+            }
+             _db.Pizzas.Add(newPizza);
+             int success = _db.SaveChanges();
 
-            if (success != 1)
-                return BadRequest(new { message = "Dati inviati non validi" });
+             if (success != 1)
+                 return BadRequest(new { message = "Dati inviati non validi" });
 
-            return Ok(newPizza);
-        }
+             return Ok(newPizza);
+         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id,[FromBody] Pizza? newPizzaData)

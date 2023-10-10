@@ -31,7 +31,7 @@ namespace la_mia_pizzeria_crud.Models
 
         [Column("image_path")]
         [DefaultValue("/img/default.png")]
-        [Url(ErrorMessage = "Inserisci un url valido")]
+        //[Url(ErrorMessage = "Inserisci un url valido")]
         [StringLength(1000)]
         public string? ImagePath { get; set; } = "/img/default.png";
 

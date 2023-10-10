@@ -15,32 +15,32 @@
     </div>
 </div>
 
-<form asp-controller="Pizza" asp-action="Create" method="post">
+<form id="create-form" asp-controller="Pizza" asp-action="Create" method="post">
     @Html.AntiForgeryToken()
     <div class="mb-3">
         <label asp-for="Pizza.Name" class="form-label">Nome</label>
-        <input asp-for="Pizza.Name" type="text" class="form-control" id="Name">
+        <input id="input-pizza-name" asp-for="Pizza.Name" type="text" class="form-control" >
         <span asp-validation-for="Pizza.Name" class="text-danger"></span>
     </div>
     <div class="mb-3">
         <label asp-for="Pizza.Description" class="form-label">Descrizione</label>
-        <input asp-for="Pizza.Description" type="text" class="form-control" id="Description">
+        <input id="input-pizza-description" asp-for="Pizza.Description" type="text" class="form-control" >
         <span asp-validation-for="Pizza.Description" class="text-danger"></span>
     </div>
     <div class="mb-3">
         <label asp-for="Pizza.Price" class="form-label">Prezzo</label>
-        <input asp-for="Pizza.Price" type="text" class="form-control" id="Price">
+        <input id="input-pizza-price" asp-for="Pizza.Price" type="text" class="form-control" >
         <span asp-validation-for="Pizza.Price" class="text-danger"></span>
     </div>
     <div class="mb-3">
         <label asp-for="Pizza.ImagePath" class="form-label">Link immagine</label>
-        <input asp-for="Pizza.ImagePath" type="text" class="form-control" id="ImagePath">
+        <input id="input-pizza-imagePath" asp-for="Pizza.ImagePath" type="text" class="form-control" >
         <span asp-validation-for="Pizza.ImagePath" class="text-danger"></span>
     </div>
     @*SELECT CATEGORY*@
     <div class="mb-3">
         <label asp-for="Pizza.CategoryId" class="form-label">Categoria</label>
-        <select class="form-select d-block w-100" asp-for="Pizza.CategoryId" rows="10">
+        <select id="input-pizza-category" class="form-select d-block w-100" asp-for="Pizza.CategoryId" rows="10">
 
             <option selected value="">Assegna una categoria..</option>
             @foreach(Category category in Model.Categories)
@@ -52,18 +52,52 @@
         <span asp-validation-for="Pizza.ImagePath" class="text-danger"></span>
 
     </div>
-    @*SELECT MULTIPLA INGREDIENTS*@
+    @*SELECT MULTIPLE INGREDIENTS*@
     <div>
         <label asp-for="SelectedIngredientsId" class="form-label">Seleziona gli Ingredienti (tieni premuto CTRL e selezionane piu di uno alla volta) :</label>
-        <select asp-for="SelectedIngredientsId" 
+        <select id="ingredients-input" asp-for="SelectedIngredientsId" 
                 multiselect="multiselect" 
                 rows="5" 
                 class="form-select d-block w-100"
                 asp-items=@Model.Ingredients>
         </select>
     </div>
-    <button type="submit" class="btn btn-primary">Crea Pizza</button>
+    <button id="create-button" type="submit" class="btn btn-primary">Crea Pizza</button>
 </form>
 
+@section Scripts{
+    <script type="text/javascript">
+        const createForm = document.getElementById("create-form");
+        const createButton = document.getElementById("create-button");
 
+        
+        
+        //chiamata axios post a Create api dove passo la pizza creata
+        createForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            //dati del form
+            const inputPizzaName = document.getElementById("input-pizza-name").value;
+            const inputPizzaDescription = document.getElementById("input-pizza-description").value;
+            const inputPizzaPrice = document.getElementById("input-pizza-price").value;
+            const inputPizzaImagePath = document.getElementById("input-pizza-imagePath").value;
+            const inputCategoryId = document.getElementById("input-pizza-category").value;
+
+            //creo oggetto pizza con dati presi dal form
+            let newPizza = {
+                Name: inputPizzaName,
+                Description: inputPizzaDescription,
+                Price: inputPizzaPrice,
+                ImagePath: inputPizzaImagePath,
+                CategoryId: inputCategoryId
+            }
+            //console.log(newPizza);
+            axios.post('/api/PizzaAPI/Create',newPizza, 
+                {
+                    headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        });
+    </script>
+}
 
