@@ -66,7 +66,7 @@ Facciamo in modo che gli utenti con role USER possano accedere solo alla pagina 
 BONUS:  
 > Provate a fare in modo che un utente quando si registra per la prima volta gli venga associato il ruolo di default come "USER"
   
-# la-mia-pizzeria-crud-mvc PARTE 7  
+# la-mia-pizzeria-crud-webapi PARTE 7  
   Ciao ragazzi, andiamo avanti col nostro progetto!  
 1. Abbiamo studiato cosa sono le WebApi...è il momento di mettere in pratica quello che abbiamo imparato.  
 2. Dobbiamo quindi creare un controller Controllers/Api/PizzasController che implementerà le nostre webapi.  
@@ -81,3 +81,16 @@ Quindi abbiamo bisogno dei metodi per :
 Testiamo tutti i metodi utilizzando Postman.  
 **BONUS:**
 Proviamo ad implementare il repository pattern, così come accennato e visto a lezione.
+
+# la-mia-pizzeria-crud-webapi PARTE 8  
+Ciao ragazzi, andiamo avanti!  
+Vogliamo far gestire le nostre pizze anche tramite webapi.  
+  
+1. Facciamo quindi in modo che l’homepage della nostra applicazione mostri l’elenco delle pizze (filtrabili per titolo).  
+2. Diamo la possibilità di creare nuove pizze tramite apposita pagina.  
+3. E non dimentichiamoci di fare in modo che le varie pizze possano essere cancellate e modificare anche tramite API.  
+> Tutte queste operazioni devono essere effettuate richiamando le webapi create nella lezione precedente con Javscript e AXIOS.
+  
+**BONUS:**    
+> Se volete potete fare tutto questo esercizio avvalendo del vostro caro amico VUE (quindi vi potete un nuovo webserver con VITE e usando vue e i suoi componenti vi fare il client che usa le api)  
+> Implementare anche il caricamento delle immagine tramite il form upload e la loro corretta gestione.  
