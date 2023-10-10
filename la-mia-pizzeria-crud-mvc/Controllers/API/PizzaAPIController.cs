@@ -33,8 +33,9 @@ namespace la_mia_pizzeria_crud.Controllers.API
         [HttpGet]
         public IActionResult SearchPizzasByName(string? search)
         {
-            if (search == null)
-                return BadRequest(new { message = "Ricerca non valida." });
+            
+            if (search == null|| search.Length==0)
+                return this.GetPizzas();
 
             List<Pizza>? pizzas = _db.Pizzas.Include(pizza => pizza.Category)
                                 .Include(pizza => pizza.Ingredients)
