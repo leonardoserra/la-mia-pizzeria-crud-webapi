@@ -57,14 +57,14 @@
         const spinner = document.getElementById("spinner");
         const noPizzasMessage = document.getElementById("no-pizzas-message");
         const searchBar = document.getElementById("search-bar");
+        let searchValue = "";
 
+        SearchPizzasByName(searchValue);
         searchBar.addEventListener('keyup', function () {
-            let searchValue = searchBar.value;
+            searchValue = searchBar.value;
             SearchPizzasByName(searchValue);
         });
         
-
-
         function SearchPizzasByName(pizzaName) {
 
             axios.get("/api/PizzaAPI/SearchPizzasByName",
